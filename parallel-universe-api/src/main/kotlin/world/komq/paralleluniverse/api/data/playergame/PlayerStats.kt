@@ -1,4 +1,4 @@
-package world.komq.paralleluniverse.api.data.universal
+package world.komq.paralleluniverse.api.data.playergame
 
 import org.jetbrains.exposed.sql.Column
 import org.jetbrains.exposed.sql.Table

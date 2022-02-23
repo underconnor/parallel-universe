@@ -1,6 +1,6 @@
 package world.komq.paralleluniverse.api.enums
 
-enum class GameTypeEnum {
+enum class GameType {
     FAKEPIT,
     TOWEL,
     ACXIVITY,

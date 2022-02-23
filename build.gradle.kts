@@ -32,7 +32,7 @@ subprojects {
         implementation("org.jetbrains.exposed:exposed-core:${project.properties["exposedVersion"]}")
         implementation("org.jetbrains.exposed:exposed-dao:${project.properties["exposedVersion"]}")
         implementation("org.jetbrains.exposed:exposed-jdbc:${project.properties["exposedVersion"]}")
-        implementation("mysql:mysql-connector-java:8.0.19")
+        implementation("mysql:mysql-connector-java:8.0.28")
     }
 }
 

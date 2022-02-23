@@ -30,6 +30,8 @@ publishing {
                     password = nexusPassword
                 }
             }.onFailure {
+                println(credentialFile.readLines(StandardCharsets.UTF_8)[0])
+                println(credentialFile.readLines(StandardCharsets.UTF_8)[1])
                 logger.warn("Failed to load nexus credentials, make sure the file exists, and check the first line contains username & second line contains password.")
             }
 
