@@ -1,6 +1,7 @@
 package world.komq.paralleluniverse.api.internal
 
 import org.jetbrains.exposed.sql.Database
+import org.jetbrains.exposed.sql.transactions.transaction
 import world.komq.paralleluniverse.api.DatabaseManager
 import java.io.File
 import java.nio.charset.StandardCharsets
@@ -44,7 +45,7 @@ class DatabaseManagerImpl: DatabaseManager {
         var db: Database? = null
 
         if (checkConfig()) {
-            db = Database.connect("${komworldDbURL}GameServerData", "com.mysql.cj.jdbc.Driver", komworldDbUsername, komworldDbPassword)
+            db = Database.connect("${if (komworldDbURL.endsWith("/")) komworldDbURL.removePrefix("/") else komworldDbURL}GameServerData", "com.mysql.cj.jdbc.Driver", komworldDbUsername, komworldDbPassword)
         }
 
         return db
@@ -54,7 +55,7 @@ class DatabaseManagerImpl: DatabaseManager {
         var db: Database? = null
 
         if (checkConfig()) {
-            db = Database.connect("${komworldDbURL}UniversalData", "com.mysql.cj.jdbc.Driver", komworldDbUsername, komworldDbPassword)
+            db = Database.connect("${if (komworldDbURL.endsWith("/")) komworldDbURL.removePrefix("/") else komworldDbURL}UniversalData", "com.mysql.cj.jdbc.Driver", komworldDbUsername, komworldDbPassword)
         }
 
         return db
@@ -64,7 +65,7 @@ class DatabaseManagerImpl: DatabaseManager {
         var db: Database? = null
 
         if (checkConfig()) {
-            db = Database.connect("${komworldDbURL}PlayerGameData", "com.mysql.cj.jdbc.Driver", komworldDbUsername, komworldDbPassword)
+            db = Database.connect("${if (komworldDbURL.endsWith("/")) komworldDbURL.removePrefix("/") else komworldDbURL}PlayerGameData", "com.mysql.cj.jdbc.Driver", komworldDbUsername, komworldDbPassword)
         }
 
         return db
@@ -96,6 +97,26 @@ class DatabaseManagerImpl: DatabaseManager {
             1 -> true
             0 -> false
             else -> false
+        }
+    }
+
+    override fun commit() {
+        transaction(gameServerDb) {
+            commit()
+        }
+        transaction(universalDb) {
+            commit()
+        }
+        transaction(playerGameDb) {
+            commit()
+        }
+        
+        if (databaseMap.values.isNotEmpty()) {
+            databaseMap.values.forEach {
+                transaction(it) {
+                    commit()
+                }
+            }
         }
     }
 }

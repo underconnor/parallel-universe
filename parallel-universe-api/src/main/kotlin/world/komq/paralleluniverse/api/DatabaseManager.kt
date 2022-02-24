@@ -60,4 +60,11 @@ interface DatabaseManager {
      * @return 변환된 Boolean 값. 1이면 true, 0이면 false.
      */
     fun intToBool(integer: Int): Boolean
+
+    /***
+     * 사용할 수 있는 데이터베이스들을 transaction을 열어 모두 commit합니다.
+     *
+     * JavaPlugin#onDisable에 넣는 것을 추천드립니다.
+     */
+    fun commit()
 }

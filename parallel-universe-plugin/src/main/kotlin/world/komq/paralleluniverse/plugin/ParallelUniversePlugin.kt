@@ -7,6 +7,7 @@ import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.scheduler.BukkitTask
+import world.komq.paralleluniverse.api.DatabaseManager.Companion.commit
 import world.komq.paralleluniverse.api.PluginManager
 import world.komq.paralleluniverse.api.PluginManager.plugin
 import world.komq.paralleluniverse.api.PluginManager.server
@@ -31,10 +32,14 @@ class ParallelUniversePlugin: JavaPlugin() {
 
         server.pluginManager.registerEvents(ParallelUniverseEvent(), this)
     }
+
+    override fun onDisable() {
+        commit()
+    }
 }
 
 class ParallelUniverseEvent: Listener {
-    var task: BukkitTask? = null
+    private var task: BukkitTask? = null
 
     @EventHandler
     fun onPlayerJoin(e: PlayerJoinEvent) {
