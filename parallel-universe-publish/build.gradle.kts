@@ -42,6 +42,8 @@ publishing {
                     "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
                 }
             )
+
+            println(url)
         }
     }
 
@@ -55,6 +57,7 @@ publishing {
             pom {
                 name.set(target.name)
                 url.set("https://github.com/komworld/${rootProject.name}")
+                description.set("Database Manager for Komworld Server.")
 
                 licenses {
                     license {
