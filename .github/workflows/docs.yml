@@ -1,4 +1,4 @@
-name: 문서 빌드
+name: API Docs Build
 on:
   push:
     branches: [master]
