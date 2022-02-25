@@ -34,8 +34,8 @@ import java.util.*
 
 @Suppress("UNUSED")
 class UniversalDataManagerImpl: UniversalDataManager {
-    override fun getPlayerRanks(playerUUID: UUID): RankType {
-        var rankType = RankType.NONE
+    override fun getPlayerRanks(playerUUID: UUID): RankType? {
+        var rankType: RankType? = null
 
         transaction(getUniversalDatabase()) {
             try {
@@ -112,8 +112,8 @@ class UniversalDataManagerImpl: UniversalDataManager {
         }
     }
 
-    override fun getPlayerCoins(playerUUID: UUID): Int {
-        var originalCoins = -1
+    override fun getPlayerCoins(playerUUID: UUID): Int? {
+        var originalCoins: Int? = null
 
         transaction(getUniversalDatabase()) {
             try {
@@ -222,8 +222,8 @@ class UniversalDataManagerImpl: UniversalDataManager {
         }
     }
 
-    override fun getAdminLastLoginDate(playerUUID: UUID): String {
-        var date = ""
+    override fun getAdminLastLoginDate(playerUUID: UUID): String? {
+        var date: String? = null
 
         transaction(getUniversalDatabase()) {
             try {

@@ -19,6 +19,5 @@ enum class RankType {
     YOUTUBER,
     EMPTYDIAMOND,
     FILLEDDIAMOND,
-    DEFAULT,
-    NONE
+    DEFAULT
 }

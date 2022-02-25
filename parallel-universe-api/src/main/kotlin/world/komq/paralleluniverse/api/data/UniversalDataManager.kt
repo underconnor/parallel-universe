@@ -26,15 +26,15 @@ interface UniversalDataManager {
      * 원하는 플레이어의 랭크를 불러옵니다.
      *
      * @param playerUUID 플레이어의 UUID
-     * @return 플레이어의 랭크 타입, NONE이 반환 될 경우 오류 발생; 해당 플레이어에 대한 랭크 정보가 없음을 의미.
+     * @return 플레이어의 랭크 타입, null이 반환 될 경우 오류 발생; 해당 플레이어에 대한 랭크 정보가 없음을 의미.
      */
-    fun getPlayerRanks(playerUUID: UUID): RankType
+    fun getPlayerRanks(playerUUID: UUID): RankType?
 
     /***
      * 원하는 플레이어의 랭크를 설정합니다.
      *
      * @param playerUUID 플레이어의 UUID
-     * @param rankType 새로 설정할 플레이어의 랭크 타입, NONE을 넣지 마세요!
+     * @param rankType 새로 설정할 플레이어의 랭크 타입.
      */
     fun setPlayerRanks(playerUUID: UUID, rankType: RankType)
 
@@ -60,9 +60,9 @@ interface UniversalDataManager {
      * 원하는 플레이어의 코인 수치를 가져옵니다.
      * 
      * @param playerUUID 플레이어의 UUID
-     * @return 현재 플레이어의 코인 수치 (Int) / 불러올 수 없는 경우 -1
+     * @return 현재 플레이어의 코인 수치 (Int) / 불러올 수 없는 경우 null
      */
-    fun getPlayerCoins(playerUUID: UUID): Int
+    fun getPlayerCoins(playerUUID: UUID): Int?
 
     /***
      * 원하는 플레이어의 코인 수치를 설정합니다.
@@ -92,17 +92,13 @@ interface UniversalDataManager {
 
     /// PlayerParties ///
 
+    // TODO: Not yet implemented
+
 //    fun addPlayerToParty()
 //
 //    fun removePlayerFromParty()
 //
-//    /***
-//     * 원하는 플레이어의 파티 정보를 불러옵니다.
-//     *
-//     * @param playerUUID 플레이어의 UUID
-//     * @return 플레이어가 소속된 파티원 UUID 목록 -> ArrayList<String>
-//     */
-//    fun getPlayerParties(playerUUID: UUID): ArrayList<String>
+//    fun getPlayerParties()
 //
 //    fun removeParty()
 
@@ -128,9 +124,9 @@ interface UniversalDataManager {
      * 관리자의 마지막 로그인 날짜를 불러옵니다.
      *
      * @param playerUUID 플레이어의 UUID
-     * @return 관리자의 마지막 로그인 날짜 / 불러 올 수 없는 경우 빈 String 반환
+     * @return 관리자의 마지막 로그인 날짜 / 불러 올 수 없는 경우 null 반환
      */
-    fun getAdminLastLoginDate(playerUUID: UUID): String
+    fun getAdminLastLoginDate(playerUUID: UUID): String?
 
     /***
      * 관리자의 마지막 로그인 날짜를 설정합니다.
