@@ -1,0 +1,27 @@
+name: 문서 빌드
+on:
+  push:
+    branches: [master]
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - name: Setup JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+      - run: sudo apt-get install dos2unix
+      - name: Build Docs
+        run: |
+          dos2unix gradlew
+          chmod +x gradlew
+          ./gradlew dokkaJar
+      - name: Upload to Github Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages
+          folder: parallel-universe-api/build/dokka/html
+# Referenced from monun/psychics, special thanks to pikokr.
