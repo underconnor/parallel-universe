@@ -22,17 +22,21 @@ publishing {
             name = "central"
 
             credentials.runCatching {
+                if (!credentialFile.exists()) credentialFile.createNewFile()
+
                 val nexusUsername = credentialFile.readLines(StandardCharsets.UTF_8)[0]
                 val nexusPassword = credentialFile.readLines(StandardCharsets.UTF_8)[1]
 
-                if (nexusUsername.isNotBlank() || nexusPassword.isNotBlank()) {
+                if (credentialFile.readLines(StandardCharsets.UTF_8).size == 2 && (nexusUsername.isNotBlank() || nexusPassword.isNotBlank())) {
+                    logger.info("Current Nexus Username: ${credentialFile.readLines(StandardCharsets.UTF_8)[0]}")
+                    logger.info("Current Nexus Password: ${credentialFile.readLines(StandardCharsets.UTF_8)[1]}")
+
                     username = nexusUsername
                     password = nexusPassword
                 }
             }.onFailure {
-                println(credentialFile.readLines(StandardCharsets.UTF_8)[0])
-                println(credentialFile.readLines(StandardCharsets.UTF_8)[1])
-                logger.warn("Failed to load nexus credentials, make sure the file exists, and check the first line contains username & second line contains password.")
+                logger.warn("Failed to load nexus credentials, make sure the credential file exists, and check the first two lines contains username & password.")
+                logger.warn("Other lines will be ignored.")
             }
 
             url = uri(
@@ -43,7 +47,7 @@ publishing {
                 }
             )
 
-            println(url)
+            logger.info("Publishing URL: $url")
         }
     }
 
