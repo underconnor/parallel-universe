@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2022 BaeHyeonWoo
+ *
+ *  Licensed under the General Public License, Version 3.0. (https://opensource.org/licenses/gpl-3.0/)
+ */
+
 package world.komq.paralleluniverse.api.internal
 
 import org.jetbrains.exposed.sql.Database
@@ -5,6 +11,13 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import world.komq.paralleluniverse.api.DatabaseManager
 import java.io.File
 import java.nio.charset.StandardCharsets
+
+/***
+ * @author BaeHyeonWoo
+ *
+ * "Until my feet are crushed,"
+ * "Until I can get ahead of myself."
+ */
 
 @Suppress("UNUSED")
 class DatabaseManagerImpl: DatabaseManager {

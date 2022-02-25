@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2022 BaeHyeonWoo
+ *
+ *  Licensed under the General Public License, Version 3.0. (https://opensource.org/licenses/gpl-3.0/)
+ */
+
 package world.komq.paralleluniverse.api.data.internal
 
 import org.jetbrains.exposed.sql.insert
@@ -13,6 +19,13 @@ import world.komq.paralleluniverse.api.data.gameserver.Fakepit
 import world.komq.paralleluniverse.api.data.gameserver.Invixible
 import world.komq.paralleluniverse.api.data.gameserver.Towel
 import world.komq.paralleluniverse.api.enums.GameType
+
+/***
+ * @author BaeHyeonWoo
+ *
+ * "Until my feet are crushed,"
+ * "Until I can get ahead of myself."
+ */
 
 @Suppress("UNUSED")
 class GameServerDataManagerImpl: GameServerDataManager {

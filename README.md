@@ -21,3 +21,9 @@ dependencies {
 libraries:
   - world.komq:parallel-universe-core:0.0.1
 ```
+
+---
+
+#### License
+
+[[GNU General Public License v3.0](/LICENSE.md)]

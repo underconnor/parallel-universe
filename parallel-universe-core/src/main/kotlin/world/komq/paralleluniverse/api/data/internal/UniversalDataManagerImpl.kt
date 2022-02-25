@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2022 BaeHyeonWoo
+ *
+ *  Licensed under the General Public License, Version 3.0. (https://opensource.org/licenses/gpl-3.0/)
+ */
+
 package world.komq.paralleluniverse.api.data.internal
 
 import org.jetbrains.exposed.sql.insert
@@ -19,6 +25,12 @@ import java.lang.System.currentTimeMillis
 import java.text.SimpleDateFormat
 import java.util.*
 
+/***
+ * @author BaeHyeonWoo
+ *
+ * "Until my feet are crushed,"
+ * "Until I can get ahead of myself."
+ */
 
 @Suppress("UNUSED")
 class UniversalDataManagerImpl: UniversalDataManager {

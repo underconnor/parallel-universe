@@ -1,7 +1,20 @@
+/*
+ * Copyright (c) 2022 BaeHyeonWoo
+ *
+ *  Licensed under the General Public License, Version 3.0. (https://opensource.org/licenses/gpl-3.0/)
+ */
+
 package world.komq.paralleluniverse.api.data
 
 import world.komq.paralleluniverse.api.LibraryLoader
 import world.komq.paralleluniverse.api.enums.GameType
+
+/***
+ * @author BaeHyeonWoo
+ *
+ * "Until my feet are crushed,"
+ * "Until I can get ahead of myself."
+ */
 
 interface GameServerDataManager {
     companion object: GameServerDataManager by LibraryLoader.loadImplement(GameServerDataManager::class.java)

@@ -1,8 +1,21 @@
+/*
+ * Copyright (c) 2022 BaeHyeonWoo
+ *
+ *  Licensed under the General Public License, Version 3.0. (https://opensource.org/licenses/gpl-3.0/)
+ */
+
 package world.komq.paralleluniverse.api.data
 
 import world.komq.paralleluniverse.api.LibraryLoader
 import world.komq.paralleluniverse.api.enums.RankType
 import java.util.UUID
+
+/***
+ * @author BaeHyeonWoo
+ *
+ * "Until my feet are crushed,"
+ * "Until I can get ahead of myself."
+ */
 
 interface UniversalDataManager {
     companion object: UniversalDataManager by LibraryLoader.loadImplement(UniversalDataManager::class.java)

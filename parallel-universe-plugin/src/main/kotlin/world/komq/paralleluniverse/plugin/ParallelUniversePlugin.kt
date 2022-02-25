@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2022 BaeHyeonWoo
+ *
+ *  Licensed under the General Public License, Version 3.0. (https://opensource.org/licenses/gpl-3.0/)
+ */
+
 package world.komq.paralleluniverse.plugin
 
 import net.kyori.adventure.text.Component.text
@@ -13,6 +19,13 @@ import world.komq.paralleluniverse.api.PluginManager.plugin
 import world.komq.paralleluniverse.api.PluginManager.server
 import world.komq.paralleluniverse.api.data.UniversalDataManager
 import world.komq.paralleluniverse.plugin.ParallelUniversePlugin.Companion.message
+
+/***
+ * @author BaeHyeonWoo
+ *
+ * "Until my feet are crushed,"
+ * "Until I can get ahead of myself."
+ */
 
 class ParallelUniversePlugin: JavaPlugin() {
 
