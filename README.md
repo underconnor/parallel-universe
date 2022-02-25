@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-  implementation("world.komq:parallel-universe-api:0.0.1-SNAPSHOT")
+  implementation("world.komq:parallel-universe-api:0.0.1")
 }
 ```
 
@@ -19,5 +19,5 @@ dependencies {
 
 ```yml
 libraries:
-  - world.komq:parallel-universe-core:0.0.1-SNAPSHOT
+  - world.komq:parallel-universe-core:0.0.1
 ```
