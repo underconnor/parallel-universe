@@ -17,7 +17,7 @@ enum class RankType {
     KOMQ,
     DEV,
     YOUTUBER,
-    EMPTYDIAMOND,
-    FILLEDDIAMOND,
+    VIP,
+    MVP,
     DEFAULT
 }

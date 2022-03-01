@@ -12,7 +12,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.exposed.sql.update
 import world.komq.paralleluniverse.api.DatabaseManager.Companion.boolToInt
 import world.komq.paralleluniverse.api.DatabaseManager.Companion.getGameServerDatabase
-import world.komq.paralleluniverse.api.PluginManager.plugin
+import world.komq.paralleluniverse.api.LoggerConfigurator.logger
 import world.komq.paralleluniverse.api.data.GameServerDataManager
 import world.komq.paralleluniverse.api.data.gameserver.Acxivity
 import world.komq.paralleluniverse.api.data.gameserver.Fakepit
@@ -61,7 +61,7 @@ class GameServerDataManagerImpl: GameServerDataManager {
                 }
             }
             catch (e: NoSuchElementException) {
-                plugin.logger.warning("[GameServerData] 게임 ${type}의 이용 가능한 서버를 가져 올 수 없습니다.")
+                logger.severe("[GameServerData] 게임 ${type}의 이용 가능한 서버를 가져 올 수 없습니다.")
             }
         }
 

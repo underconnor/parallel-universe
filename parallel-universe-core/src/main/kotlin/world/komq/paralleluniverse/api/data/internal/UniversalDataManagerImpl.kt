@@ -11,9 +11,9 @@ import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.exposed.sql.update
 import world.komq.paralleluniverse.api.DatabaseManager.Companion.boolToInt
-import world.komq.paralleluniverse.api.DatabaseManager.Companion.intToBool
 import world.komq.paralleluniverse.api.DatabaseManager.Companion.getUniversalDatabase
-import world.komq.paralleluniverse.api.PluginManager.plugin
+import world.komq.paralleluniverse.api.DatabaseManager.Companion.intToBool
+import world.komq.paralleluniverse.api.LoggerConfigurator.logger
 import world.komq.paralleluniverse.api.data.UniversalDataManager
 import world.komq.paralleluniverse.api.data.universal.AdminContents
 import world.komq.paralleluniverse.api.data.universal.PlayerCoins
@@ -21,8 +21,7 @@ import world.komq.paralleluniverse.api.data.universal.PlayerFriends
 import world.komq.paralleluniverse.api.data.universal.PlayerRanks
 import world.komq.paralleluniverse.api.data.universal.PlayerRanks.rank
 import world.komq.paralleluniverse.api.enums.RankType
-import java.lang.System.currentTimeMillis
-import java.text.SimpleDateFormat
+import java.time.LocalDateTime
 import java.util.*
 
 /***
@@ -44,7 +43,7 @@ class UniversalDataManagerImpl: UniversalDataManager {
                 }.single().also { rankType = RankType.valueOf(it[rank].uppercase()) }
             }
             catch (e: NoSuchElementException) {
-                plugin.logger.severe("[UniversalData] 플레이어 \"${plugin.server.getPlayer(playerUUID)?.name}\"의 랭크를 가져 올 수 없습니다.")
+                logger.severe("[UniversalData] UUID \"${playerUUID}\"의 랭크를 가져 올 수 없습니다.")
             }
         }
 
@@ -122,7 +121,7 @@ class UniversalDataManagerImpl: UniversalDataManager {
                 }.single().also { originalCoins = it[PlayerCoins.coin] }
             }
             catch (e: NoSuchElementException) {
-                plugin.logger.severe("[UniversalData] 플레이어 \"${plugin.server.getPlayer(playerUUID)?.name}\"의 코인 수를 가져 올 수 없습니다.")
+                logger.severe("[UniversalData] UUID \"${playerUUID}\"의 코인 수를 가져 올 수 없습니다.")
             }
         }
 
@@ -160,7 +159,7 @@ class UniversalDataManagerImpl: UniversalDataManager {
                 }
             }
             catch (e: NoSuchElementException) {
-                plugin.logger.severe("[UniversalData] 플레이어 \"${plugin.server.getPlayer(playerUUID)?.name}\"의 친구 목록을 가져 올 수 없습니다.")
+                logger.severe("[UniversalData] UUID \"${playerUUID}\"의 친구 목록을 가져 올 수 없습니다.")
             }
         }
 
@@ -196,7 +195,7 @@ class UniversalDataManagerImpl: UniversalDataManager {
                 }.single().also { status = intToBool(it[AdminContents.tfastatus]) }
             }
             catch (e: NoSuchElementException) {
-                plugin.logger.severe("[UniversalData] 관리자 플레이어 \"${plugin.server.getPlayer(playerUUID)?.name}\"의 2FA 로그인 상태를 가져 올 수 없습니다.")
+                logger.severe("[UniversalData] 관리자 UUID \"${playerUUID}\"의 2FA 로그인 상태를 가져 올 수 없습니다.")
             }
         }
 
@@ -232,7 +231,7 @@ class UniversalDataManagerImpl: UniversalDataManager {
                 }.single().also { date = it[AdminContents.lastlogindate] }
             }
             catch (e: NoSuchElementException) {
-                plugin.logger.severe("[UniversalData] 관리자 플레이어 \"${plugin.server.getPlayer(playerUUID)?.name}\"의 마지막 로그인 날짜를 가져 올 수 없습니다.")
+                logger.severe("[UniversalData] 관리자 UUID \"${playerUUID}\"의 마지막 로그인 날짜를 가져 올 수 없습니다.")
             }
         }
 
@@ -240,9 +239,8 @@ class UniversalDataManagerImpl: UniversalDataManager {
     }
 
     override fun setAdminLastloginDate(playerUUID: UUID) {
-        val currentDate = currentTimeMillis()
-        val format = SimpleDateFormat("yyyy-mm-dd hh:mm:ss")
-        val finalDate = format.format(currentDate)
+        val localDateTime = LocalDateTime.now()
+        val date = "${localDateTime.year}-${localDateTime.monthValue}-${localDateTime.dayOfMonth} ${localDateTime.hour}:${localDateTime.minute}:${localDateTime.second}"
 
         transaction(getUniversalDatabase()) {
             try {
@@ -250,13 +248,13 @@ class UniversalDataManagerImpl: UniversalDataManager {
                     AdminContents.uuid eq playerUUID.toString()
                 }.single()
                 AdminContents.update({ AdminContents.uuid eq playerUUID.toString() }) {
-                    it[lastlogindate] = finalDate
+                    it[lastlogindate] = date
                 }
             }
             catch (e: NoSuchElementException) {
                 AdminContents.insert {
                     it[uuid] = playerUUID.toString()
-                    it[lastlogindate] = finalDate
+                    it[lastlogindate] = date
                 }
             }
         }

@@ -27,9 +27,6 @@ class DatabaseManagerImpl: DatabaseManager {
     private var komworldDbUsername: String = ""
     private var komworldDbPassword: String = ""
 
-    private var gameServerDb: Database? = null
-    private var universalDb: Database? = null
-    private var playerGameDb: Database? = null
     private var otherDb: Database? = null
 
     private val databaseMap = HashMap<String, Database?>()
@@ -114,13 +111,13 @@ class DatabaseManagerImpl: DatabaseManager {
     }
 
     override fun commit() {
-        transaction(gameServerDb) {
+        transaction(getGameServerDatabase()) {
             commit()
         }
-        transaction(universalDb) {
+        transaction(getUniversalDatabase()) {
             commit()
         }
-        transaction(playerGameDb) {
+        transaction(getPlayerGameDatabase()) {
             commit()
         }
         
