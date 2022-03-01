@@ -79,11 +79,15 @@ $dokka.location:world.komq.paralleluniverse.api.enums/GameType.TOWEL///PointingT
 $dokka.location:world.komq.paralleluniverse.api.enums/GameType///PointingToDeclaration/parallel-universe-api/world.komq.paralleluniverse.api.enums/-game-type/index.html
 $dokka.location:world.komq.paralleluniverse.api.enums/RankType.DEFAULT///PointingToDeclaration/parallel-universe-api/world.komq.paralleluniverse.api.enums/-rank-type/-d-e-f-a-u-l-t/index.html
 $dokka.location:world.komq.paralleluniverse.api.enums/RankType.DEV///PointingToDeclaration/parallel-universe-api/world.komq.paralleluniverse.api.enums/-rank-type/-d-e-v/index.html
-$dokka.location:world.komq.paralleluniverse.api.enums/RankType.EMPTYDIAMOND///PointingToDeclaration/parallel-universe-api/world.komq.paralleluniverse.api.enums/-rank-type/-e-m-p-t-y-d-i-a-m-o-n-d/index.html
-$dokka.location:world.komq.paralleluniverse.api.enums/RankType.FILLEDDIAMOND///PointingToDeclaration/parallel-universe-api/world.komq.paralleluniverse.api.enums/-rank-type/-f-i-l-l-e-d-d-i-a-m-o-n-d/index.html
 $dokka.location:world.komq.paralleluniverse.api.enums/RankType.KOMQ///PointingToDeclaration/parallel-universe-api/world.komq.paralleluniverse.api.enums/-rank-type/-k-o-m-q/index.html
+$dokka.location:world.komq.paralleluniverse.api.enums/RankType.MVP///PointingToDeclaration/parallel-universe-api/world.komq.paralleluniverse.api.enums/-rank-type/-m-v-p/index.html
+$dokka.location:world.komq.paralleluniverse.api.enums/RankType.VIP///PointingToDeclaration/parallel-universe-api/world.komq.paralleluniverse.api.enums/-rank-type/-v-i-p/index.html
 $dokka.location:world.komq.paralleluniverse.api.enums/RankType.YOUTUBER///PointingToDeclaration/parallel-universe-api/world.komq.paralleluniverse.api.enums/-rank-type/-y-o-u-t-u-b-e-r/index.html
 $dokka.location:world.komq.paralleluniverse.api.enums/RankType///PointingToDeclaration/parallel-universe-api/world.komq.paralleluniverse.api.enums/-rank-type/index.html
+$dokka.location:world.komq.paralleluniverse.api.logger////PointingToDeclaration/parallel-universe-api/world.komq.paralleluniverse.api.logger/index.html
+$dokka.location:world.komq.paralleluniverse.api.logger/CustomLogger///PointingToDeclaration/parallel-universe-api/world.komq.paralleluniverse.api.logger/-custom-logger/index.html
+$dokka.location:world.komq.paralleluniverse.api.logger/CustomLogger/CustomLogger/#/PointingToDeclaration/parallel-universe-api/world.komq.paralleluniverse.api.logger/-custom-logger/-custom-logger.html
+$dokka.location:world.komq.paralleluniverse.api.logger/CustomLogger/format/#java.util.logging.LogRecord/PointingToDeclaration/parallel-universe-api/world.komq.paralleluniverse.api.logger/-custom-logger/format.html
 $dokka.location:world.komq.paralleluniverse.api////PointingToDeclaration/parallel-universe-api/world.komq.paralleluniverse.api/index.html
 $dokka.location:world.komq.paralleluniverse.api/DatabaseManager.Companion///PointingToDeclaration/parallel-universe-api/world.komq.paralleluniverse.api/-database-manager/-companion/index.html
 $dokka.location:world.komq.paralleluniverse.api/DatabaseManager///PointingToDeclaration/parallel-universe-api/world.komq.paralleluniverse.api/-database-manager/index.html
@@ -97,13 +101,13 @@ $dokka.location:world.komq.paralleluniverse.api/DatabaseManager/getUniversalData
 $dokka.location:world.komq.paralleluniverse.api/DatabaseManager/intToBool/#kotlin.Int/PointingToDeclaration/parallel-universe-api/world.komq.paralleluniverse.api/-database-manager/int-to-bool.html
 $dokka.location:world.komq.paralleluniverse.api/LibraryLoader///PointingToDeclaration/parallel-universe-api/world.komq.paralleluniverse.api/-library-loader/index.html
 $dokka.location:world.komq.paralleluniverse.api/LibraryLoader/loadImplement/#java.lang.Class[TypeParam(bounds=[kotlin.Any?])]#kotlin.Array[kotlin.Any?]/PointingToDeclaration/parallel-universe-api/world.komq.paralleluniverse.api/-library-loader/load-implement.html
-$dokka.location:world.komq.paralleluniverse.api/PluginManager///PointingToDeclaration/parallel-universe-api/world.komq.paralleluniverse.api/-plugin-manager/index.html
-$dokka.location:world.komq.paralleluniverse.api/PluginManager/plugin/#/PointingToDeclaration/parallel-universe-api/world.komq.paralleluniverse.api/-plugin-manager/plugin.html
-$dokka.location:world.komq.paralleluniverse.api/PluginManager/server/#/PointingToDeclaration/parallel-universe-api/world.komq.paralleluniverse.api/-plugin-manager/server.html
+$dokka.location:world.komq.paralleluniverse.api/LoggerConfigurator///PointingToDeclaration/parallel-universe-api/world.komq.paralleluniverse.api/-logger-configurator/index.html
+$dokka.location:world.komq.paralleluniverse.api/LoggerConfigurator/logger/#/PointingToDeclaration/parallel-universe-api/world.komq.paralleluniverse.api/-logger-configurator/logger.html
 world.komq.paralleluniverse.api
 world.komq.paralleluniverse.api.data
 world.komq.paralleluniverse.api.data.gameserver
 world.komq.paralleluniverse.api.data.playergame
 world.komq.paralleluniverse.api.data.universal
 world.komq.paralleluniverse.api.enums
+world.komq.paralleluniverse.api.logger
 
