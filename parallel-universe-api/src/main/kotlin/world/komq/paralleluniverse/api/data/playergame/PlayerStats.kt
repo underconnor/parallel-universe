@@ -16,12 +16,10 @@ import org.jetbrains.exposed.sql.Table
  * "Until I can get ahead of myself."
  */
 
-// PLEASE REMOVE SUPPRESS WHEN USING ALL CONTENTS.
-@Suppress("UNUSED")
 object PlayerStats: Table() {
-    @Suppress
     val uuid: Column<String> = text("uuid").uniqueIndex()
     val gametype: Column<String> = text("gametype").uniqueIndex()
     val coins: Column<Int> = integer("coins")
+    val kills: Column<Int> = integer("kills")
     override val primaryKey = PrimaryKey(uuid)
 }

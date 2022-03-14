@@ -9,6 +9,7 @@ package world.komq.paralleluniverse.api.internal
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.transactions.transaction
 import world.komq.paralleluniverse.api.DatabaseManager
+import world.komq.paralleluniverse.api.LoggerObject.logger
 import java.io.File
 import java.nio.charset.StandardCharsets
 
@@ -34,6 +35,8 @@ class DatabaseManagerImpl: DatabaseManager {
     private fun checkConfig(): Boolean {
         val result = if (!komworldDatabaseConf.exists()) {
             komworldDatabaseConf.createNewFile()
+            logger.severe("[DatabaseManager] 서버 루트 디렉터리에 있는 komworldDatabaseConf.txt를 수정해주세요. 그렇지 않을 경우 작동되지 않습니다.")
+            logger.severe("1번째 줄은 URL, 2번째 줄은 사용자이름, 3번재 줄은 비밀번호입니다.")
 
             false
         }
@@ -111,14 +114,35 @@ class DatabaseManagerImpl: DatabaseManager {
     }
 
     override fun commit() {
-        transaction(getGameServerDatabase()) {
-            commit()
+        val gameServerDb = getGameServerDatabase()
+        val universalDb = getUniversalDatabase()
+        val playerGameDb = getPlayerGameDatabase()
+
+        if (gameServerDb != null) {
+            transaction(gameServerDb) {
+                commit()
+            }
         }
-        transaction(getUniversalDatabase()) {
-            commit()
+        else {
+            logger.severe("[DatabaseManager] GameServerData 데이터베이스를 가져 올 수 없습니다.")
         }
-        transaction(getPlayerGameDatabase()) {
-            commit()
+
+        if (universalDb != null) {
+            transaction(universalDb) {
+                commit()
+            }
+        }
+        else {
+            logger.severe("[DatabaseManager] UniversalData 데이터베이스를 가져 올 수 없습니다.")
+        }
+
+        if (playerGameDb != null) {
+            transaction(playerGameDb) {
+                commit()
+            }
+        }
+        else {
+            logger.severe("[DatabaseManager] PlayerGameData 데이터베이스를 가져 올 수 없습니다.")
         }
         
         if (databaseMap.values.isNotEmpty()) {

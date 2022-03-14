@@ -13,8 +13,8 @@ import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.scheduler.BukkitTask
 import world.komq.paralleluniverse.api.DatabaseManager.Companion.commit
-import world.komq.paralleluniverse.api.data.UniversalDataManager.Companion.getAdminLastLoginDate
-import world.komq.paralleluniverse.api.data.UniversalDataManager.Companion.setAdminLastloginDate
+import world.komq.paralleluniverse.api.data.UniversalDataManager.Companion.adminLastLoginDate
+import world.komq.paralleluniverse.api.enums.AssignType
 import world.komq.paralleluniverse.plugin.ParallelUniverseObject.plugin
 import world.komq.paralleluniverse.plugin.ParallelUniverseObject.server
 
@@ -56,12 +56,12 @@ class ParallelUniverseEvent: Listener {
     fun onPlayerJoin(e: PlayerJoinEvent) {
         val p = e.player
 
-        if (getAdminLastLoginDate(p.uniqueId) == null) {
+        if (adminLastLoginDate(p.uniqueId, AssignType.GET) == null) {
             plugin.logger.warning("${p.name}'s last login date is null.")
         }
 
-        setAdminLastloginDate(p.uniqueId)
-        plugin.logger.info("Login date has been set to : ${getAdminLastLoginDate(p.uniqueId)}.")
+        adminLastLoginDate(p.uniqueId, AssignType.SET)
+        plugin.logger.info("Login date has been set to : ${adminLastLoginDate(p.uniqueId, AssignType.GET)}.")
     }
 
     @EventHandler
