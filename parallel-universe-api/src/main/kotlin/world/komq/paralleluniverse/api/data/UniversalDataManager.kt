@@ -36,12 +36,20 @@ interface UniversalDataManager {
     fun playerRanks(playerUUID: UUID, assignType: AssignType, newRankType: RankType? = null): RankType?
 
     /***
-     * 원하는 랭크의 색을 불러옵니다.
+     * 원하는 랭크의 Prefix를 불러옵니다.
      *
      * @param rankType 랭크 타입
-     * @return 랭크에 해당하는 색상의 R, G, B의 Int값이 담긴 ArrayList<Int>
+     * @return 랭크에 해당하는 Prefix (Component)
      */
-    fun getRankPrefix(rankType: RankType, playerName: String?): Component
+    fun getRankPrefixComponent(rankType: RankType, playerName: String? = null): Component
+
+    /***
+     * 원하는 랭크의 Prefix를 불러옵니다.
+     *
+     * @param rankType 랭크 타입
+     * @return 랭크에 해당하는 Prefix (Colored String using ChatColor)
+     */
+    fun getRankPrefixChatColor(rankType: RankType, playerName: String? = null): String
 
     /// PlayerCoins ///
 

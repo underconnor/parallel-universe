@@ -9,6 +9,7 @@ package world.komq.paralleluniverse.api.data.internal
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.Component.text
 import net.kyori.adventure.text.format.TextColor.color
+import org.bukkit.ChatColor
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -70,7 +71,7 @@ class UniversalDataManagerImpl: UniversalDataManager {
                         }
                     }
                     else -> {
-                        logger.severe("[UniversalData] 잘못된 AssingType을 설정하셨습니다. (GET/SET 중 하나를 선택해주세요.)")
+                        logger.severe("[UniversalData] 잘못된 AssignType을 설정하셨습니다. (GET/SET 중 하나를 선택해주세요.)")
                     }
                 }
             }
@@ -82,7 +83,7 @@ class UniversalDataManagerImpl: UniversalDataManager {
         return rankType
     }
 
-    override fun getRankPrefix(rankType: RankType, playerName: String?): Component {
+    override fun getRankPrefixComponent(rankType: RankType, playerName: String?): Component {
         var prefix = text("")
 
         when (rankType) {
@@ -95,10 +96,10 @@ class UniversalDataManagerImpl: UniversalDataManager {
             }
             RankType.VIP -> {
                 prefix = if (playerName != null) {
-                    text("[VIP] $playerName").color(color(0xFFAA00))
+                    text("[VIP] $playerName").color(color(0xFFFF00))
                 }
                 else {
-                    text("[VIP] ").color(color(0xFFAA00))
+                    text("[VIP] ").color(color(0xFFFF00))
                 }
             }
             RankType.MVP -> {
@@ -119,18 +120,75 @@ class UniversalDataManagerImpl: UniversalDataManager {
             }
             RankType.DEV -> {
                 prefix = if (playerName != null) {
-                    text("[DEV] $playerName").color(color(0xFF69B4))
+                    text("[DEV] $playerName").color(color(0xFF55FF))
                 }
                 else {
-                    text("[DEV] ").color(color(0xFF69B4))
+                    text("[DEV] ").color(color(0xFF55FF))
                 }
             }
             RankType.KOMQ -> {
                 prefix = if (playerName != null) {
-                    text("[KOMQ] $playerName").color(color(0xDC4F09))
+                    text("[KOMQ] $playerName").color(color(0xFFAA00))
                 }
                 else {
-                    text("[KOMQ] ").color(color(0xDC4F09))
+                    text("[KOMQ] ").color(color(0xFFAA00))
+                }
+            }
+        }
+
+        return prefix
+    }
+
+    override fun getRankPrefixChatColor(rankType: RankType, playerName: String?): String {
+        var prefix = ""
+
+        when (rankType) {
+            RankType.DEFAULT -> {
+                prefix = if (playerName != null) {
+                    "${ChatColor.GRAY}[DEFAULT] $playerName"
+                }
+                else {
+                    "${ChatColor.GRAY}[DEFAULT] "
+                }
+            }
+            RankType.VIP -> {
+                prefix = if (playerName != null) {
+                    "${ChatColor.GOLD}[VIP] $playerName"
+                }
+                else {
+                    "${ChatColor.GOLD}[VIP] "
+                }
+            }
+            RankType.MVP -> {
+                prefix = if (playerName != null) {
+                    "${ChatColor.AQUA}[MVP] $playerName"
+                }
+                else {
+                    "${ChatColor.AQUA}[MVP] "
+                }
+            }
+            RankType.YOUTUBER -> {
+                prefix = if (playerName != null) {
+                    "${ChatColor.RED}[YOUTUBE] $playerName"
+                }
+                else {
+                    "${ChatColor.RED}[YOUTUBE] "
+                }
+            }
+            RankType.DEV -> {
+                prefix = if (playerName != null) {
+                    "${ChatColor.LIGHT_PURPLE}[DEV] $playerName"
+                }
+                else {
+                    "${ChatColor.LIGHT_PURPLE}[DEV] "
+                }
+            }
+            RankType.KOMQ -> {
+                prefix = if (playerName != null) {
+                    "${ChatColor.GOLD}[KOMQ] $playerName"
+                }
+                else {
+                    "${ChatColor.GOLD}[KOMQ]"
                 }
             }
         }
@@ -243,7 +301,7 @@ class UniversalDataManagerImpl: UniversalDataManager {
                         }
                     }
                     else -> {
-                        logger.severe("[UniversalData] 잘못된 AssingType을 설정하셨습니다. (GET/SET 중 하나를 선택해주세요.)")
+                        logger.severe("[UniversalData] 잘못된 AssignType을 설정하셨습니다. (GET/SET 중 하나를 선택해주세요.)")
                     }
                 }
             }
@@ -286,7 +344,7 @@ class UniversalDataManagerImpl: UniversalDataManager {
                         }
                     }
                     else -> {
-                        logger.severe("[UniversalData] 잘못된 AssingType을 설정하셨습니다. (GET/SET 중 하나를 선택해주세요.)")
+                        logger.severe("[UniversalData] 잘못된 AssignType을 설정하셨습니다. (GET/SET 중 하나를 선택해주세요.)")
                     }
                 }
             }
@@ -331,7 +389,7 @@ class UniversalDataManagerImpl: UniversalDataManager {
                         }
                     }
                     else -> {
-                        logger.severe("[UniversalData] 잘못된 AssingType을 설정하셨습니다. (GET/SET 중 하나를 선택해주세요.)")
+                        logger.severe("[UniversalData] 잘못된 AssignType을 설정하셨습니다. (GET/SET 중 하나를 선택해주세요.)")
                     }
                 }
             }
