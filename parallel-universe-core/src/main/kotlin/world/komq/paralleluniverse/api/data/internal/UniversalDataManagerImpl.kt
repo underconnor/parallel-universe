@@ -8,6 +8,7 @@ package world.komq.paralleluniverse.api.data.internal
 
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.Component.text
+import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextColor.color
 import org.bukkit.ChatColor
 import org.jetbrains.exposed.sql.insert
@@ -89,41 +90,41 @@ class UniversalDataManagerImpl: UniversalDataManager {
         when (rankType) {
             RankType.DEFAULT -> {
                 prefix = if (playerName != null) {
-                    text("[DEFAULT] $playerName").color(color(0xAAAAAA))
+                    text("[DEFAULT] $playerName", NamedTextColor.GRAY)
                 } else {
-                    text("[DEFAULT] ").color(color(0xAAAAAA))
+                    text("[DEFAULT]", NamedTextColor.GRAY)
                 }
             }
             RankType.VIP -> {
                 prefix = if (playerName != null) {
-                    text("[VIP] $playerName").color(color(0xFFFF00))
+                    text("[VIP] $playerName", NamedTextColor.YELLOW)
                 }
                 else {
-                    text("[VIP] ").color(color(0xFFFF00))
+                    text("[VIP]", NamedTextColor.YELLOW)
                 }
             }
             RankType.MVP -> {
                 prefix = if (playerName != null) {
-                    text("[MVP] $playerName").color(color(0x55FFFF))
+                    text("[MVP] $playerName", NamedTextColor.AQUA)
                 }
                 else {
-                    text("[MVP] ").color(color(0x55FFFF))
+                    text("[MVP]", NamedTextColor.AQUA)
                 }
             }
             RankType.YOUTUBER -> {
                 prefix = if (playerName != null) {
-                    text("[YOUTUBE] $playerName").color(color(0xFF5555))
+                    text("[YOUTUBE] $playerName", NamedTextColor.RED)
                 }
                 else {
-                    text("[YOUTUBE] ").color(color(0xFF5555))
+                    text("[YOUTUBE]", NamedTextColor.RED)
                 }
             }
             RankType.DEV -> {
                 prefix = if (playerName != null) {
-                    text("[DEV] $playerName").color(color(0xFF55FF))
+                    text("[DEV] $playerName", NamedTextColor.LIGHT_PURPLE)
                 }
                 else {
-                    text("[DEV] ").color(color(0xFF55FF))
+                    text("[DEV]", NamedTextColor.LIGHT_PURPLE)
                 }
             }
             RankType.KOMQ -> {
@@ -148,7 +149,7 @@ class UniversalDataManagerImpl: UniversalDataManager {
                     "${ChatColor.GRAY}[DEFAULT] $playerName"
                 }
                 else {
-                    "${ChatColor.GRAY}[DEFAULT] "
+                    "${ChatColor.GRAY}[DEFAULT]"
                 }
             }
             RankType.VIP -> {
@@ -156,7 +157,7 @@ class UniversalDataManagerImpl: UniversalDataManager {
                     "${ChatColor.GOLD}[VIP] $playerName"
                 }
                 else {
-                    "${ChatColor.GOLD}[VIP] "
+                    "${ChatColor.GOLD}[VIP]"
                 }
             }
             RankType.MVP -> {
@@ -164,7 +165,7 @@ class UniversalDataManagerImpl: UniversalDataManager {
                     "${ChatColor.AQUA}[MVP] $playerName"
                 }
                 else {
-                    "${ChatColor.AQUA}[MVP] "
+                    "${ChatColor.AQUA}[MVP]"
                 }
             }
             RankType.YOUTUBER -> {
@@ -172,7 +173,7 @@ class UniversalDataManagerImpl: UniversalDataManager {
                     "${ChatColor.RED}[YOUTUBE] $playerName"
                 }
                 else {
-                    "${ChatColor.RED}[YOUTUBE] "
+                    "${ChatColor.RED}[YOUTUBE]"
                 }
             }
             RankType.DEV -> {
@@ -180,7 +181,7 @@ class UniversalDataManagerImpl: UniversalDataManager {
                     "${ChatColor.LIGHT_PURPLE}[DEV] $playerName"
                 }
                 else {
-                    "${ChatColor.LIGHT_PURPLE}[DEV] "
+                    "${ChatColor.LIGHT_PURPLE}[DEV]"
                 }
             }
             RankType.KOMQ -> {
@@ -223,13 +224,17 @@ class UniversalDataManagerImpl: UniversalDataManager {
                                 PlayerCoins.uuid eq playerUUID.toString()
                             }.single().also { coins = it[PlayerCoins.coin] }
                             PlayerCoins.update({ PlayerCoins.uuid eq playerUUID.toString() }) {
-                                it[coin] = 0.coerceAtLeast(requireNotNull(coins) - requireNotNull(amount))
+                                val finalCoins = if (coins != null) 0.coerceAtLeast(requireNotNull(coins) - requireNotNull(amount)) else 0
+
+                                it[coin] = finalCoins
                             }
                         }
                         catch (e: NoSuchElementException) {
                             PlayerCoins.insert {
                                 it[uuid] = playerUUID.toString()
-                                it[coin] = 0.coerceAtLeast(requireNotNull(coins) - requireNotNull(amount))
+                                val finalCoins = if (coins != null) 0.coerceAtLeast(requireNotNull(coins) - requireNotNull(amount)) else 0
+
+                                it[coin] = finalCoins
                             }
                         }
                     }

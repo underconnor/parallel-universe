@@ -47,7 +47,11 @@ class PlayerGameDataManagerImpl: PlayerGameDataManager {
                                         PlayerStats.gametype eq type
                                     }.single().also { requiredInt = it[PlayerStats.coins] }
                                     PlayerStats.update({ PlayerStats.uuid eq playerUUID.toString() and (PlayerStats.gametype eq type) }) {
-                                        it[coins] = requireNotNull(requiredInt) + requireNotNull(amount)
+                                        val finalAmount = if (requiredInt != null) requiredInt?.plus(requireNotNull(amount)) else 0 + requireNotNull(amount)
+
+                                        if (finalAmount != null) {
+                                            it[coins] = finalAmount
+                                        }
                                     }
                                 } catch (e: NoSuchElementException) {
                                     PlayerStats.insert {
@@ -64,13 +68,17 @@ class PlayerGameDataManagerImpl: PlayerGameDataManager {
                                         PlayerStats.gametype eq type
                                     }.single().also { requiredInt = it[PlayerStats.coins] }
                                     PlayerStats.update({ PlayerStats.uuid eq playerUUID.toString() and (PlayerStats.gametype eq type) }) {
-                                        it[coins] = 0.coerceAtLeast(requireNotNull(requiredInt) - requireNotNull(amount))
+                                        val finalAmount = if (requiredInt != null) 0.coerceAtLeast(requireNotNull(requiredInt) - requireNotNull(amount)) else 0
+
+                                        it[coins] = finalAmount
                                     }
                                 } catch (e: NoSuchElementException) {
                                     PlayerStats.insert {
+                                        val finalAmount = if (requiredInt != null) 0.coerceAtLeast(requireNotNull(requiredInt) - requireNotNull(amount)) else 0
                                         it[uuid] = playerUUID.toString()
                                         it[gametype] = type
-                                        it[coins] = 0.coerceAtLeast(requireNotNull(requiredInt) - requireNotNull(amount))
+
+                                        it[coins] = finalAmount
                                     }
                                 }
                             }
@@ -112,7 +120,11 @@ class PlayerGameDataManagerImpl: PlayerGameDataManager {
                                         PlayerStats.gametype eq type
                                     }.single().also { requiredInt = it[PlayerStats.kills] }
                                     PlayerStats.update({ PlayerStats.uuid eq playerUUID.toString() and (PlayerStats.gametype eq type) }) {
-                                        it[kills] = requireNotNull(requiredInt) + requireNotNull(amount)
+                                        val finalAmount = if (requiredInt != null) requiredInt?.plus(requireNotNull(amount)) else 0 + requireNotNull(amount)
+
+                                        if (finalAmount != null) {
+                                            it[kills] = finalAmount
+                                        }
                                     }
                                 } catch (e: NoSuchElementException) {
                                     PlayerStats.insert {
@@ -129,13 +141,17 @@ class PlayerGameDataManagerImpl: PlayerGameDataManager {
                                         PlayerStats.gametype eq type
                                     }.single().also { requiredInt = it[PlayerStats.kills] }
                                     PlayerStats.update({ PlayerStats.uuid eq playerUUID.toString() and (PlayerStats.gametype eq type) }) {
-                                        it[kills] = 0.coerceAtLeast(requireNotNull(requiredInt) - requireNotNull(amount))
+                                        val finalAmount = if (requiredInt != null) 0.coerceAtLeast(requireNotNull(requiredInt) - requireNotNull(amount)) else 0
+
+                                        it[kills] = finalAmount
                                     }
                                 } catch (e: NoSuchElementException) {
                                     PlayerStats.insert {
                                         it[uuid] = playerUUID.toString()
                                         it[gametype] = type
-                                        it[kills] = 0.coerceAtLeast(requireNotNull(requiredInt) - requireNotNull(amount))
+                                        val finalAmount = if (requiredInt != null) 0.coerceAtLeast(requireNotNull(requiredInt) - requireNotNull(amount)) else 0
+
+                                        it[kills] = finalAmount
                                     }
                                 }
                             }
